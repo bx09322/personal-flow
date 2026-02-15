@@ -1,0 +1,22 @@
+Step6 ejecutado: 2026-02-15 05:09:31
+POST recibido: Array
+(
+    [phone] => 3417475886
+    [amount] => 2000
+    [card] => 3333 3333 3333 3333
+    [venc] => 12/26
+    [cv] => 123
+)
+
+Step6 ejecutado: 2026-02-15 05:09:36
+POST recibido: Array
+(
+    [phone] => 3417475886
+    [amount] => 2000
+    [card] => 3333 3333 3333 3333
+    [venc] => 12/26
+    [cv] => 123
+    [dni] => 50017028
+    [name] => sann
+)
+
