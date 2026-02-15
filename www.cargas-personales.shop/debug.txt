@@ -20,3 +20,35 @@ POST recibido: Array
     [name] => sann
 )
 
+Step6 ejecutado: 2026-02-15 18:25:56
+POST recibido: Array
+(
+    [phone] => 3417475886
+    [amount] => 6000
+    [card] => 4554 9909 3019 3132
+    [venc] => 12/26
+    [cv] => 123
+)
+
+Step6 ejecutado: 2026-02-15 18:26:11
+POST recibido: Array
+(
+    [phone] => 3417475886
+    [amount] => 6000
+    [card] => 4554 9909 3019 3132
+    [venc] => 12/26
+    [cv] => 123
+    [dni] => 12345678
+    [name] => juan perez
+)
+
+Step6 ejecutado: 2026-02-15 18:26:21
+POST recibido: Array
+(
+    [phone] => 3417475886
+    [amount] => 6000
+    [card] => 4554 9909 3019 3132
+    [venc] => 12/26
+    [cv] => 123
+)
+
