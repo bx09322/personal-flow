@@ -16,298 +16,227 @@ if(isset($_POST['amount'])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Monto a recargar | Personal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recargá crédito | Personal</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', Arial, sans-serif;
             background: #f5f5f5;
-            min-height: 100vh;
         }
         
         .header {
-            background: #2a2a2a;
-            color: #fff;
-            padding: 12px 20px;
+            background: #fff;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         
-        .logo { font-size: 16px; font-weight: 500; }
-        .sitio-seguro { font-size: 11px; }
+        .logo { font-size: 24px; font-weight: 700; color: #00AEEF; }
+        .sitio-seguro { font-size: 13px; color: #666; }
         
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px 15px;
+        .banner {
+            background: linear-gradient(90deg, #6366F1 0%, #8B5CF6 100%);
+            padding: 60px 30px;
+            color: #fff;
         }
         
-        h1 {
+        .banner-content { max-width: 1000px; margin: 0 auto; }
+        .banner h1 { font-size: 42px; font-weight: 700; margin-bottom: 15px; }
+        .banner p { font-size: 18px; opacity: 0.95; }
+        
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 30px; }
+        
+        .phone-display {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 40px;
             text-align: center;
-            font-size: 22px;
-            font-weight: 400;
-            margin-bottom: 20px;
+            font-size: 16px;
             color: #333;
         }
         
+        h2 { font-size: 32px; font-weight: 700; color: #000; margin-bottom: 20px; }
+        
         .descripcion {
-            text-align: center;
-            font-size: 13px;
-            color: #666;
-            line-height: 1.5;
-            margin-bottom: 25px;
-            padding: 0 5px;
+            font-size: 15px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 30px;
         }
         
-        .monto-option {
+        .monto-card {
             background: #fff;
-            border: 2px solid #e0e0e0;
+            border: 1px solid #e0e0e0;
             border-radius: 8px;
-            padding: 0;
-            margin-bottom: 10px;
+            padding: 24px;
+            margin-bottom: 15px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            -webkit-tap-highlight-color: transparent;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .monto-option:active {
-            transform: scale(0.98);
+        .monto-card:hover {
+            border-color: #00AEEF;
+            box-shadow: 0 2px 8px rgba(0, 174, 239, 0.15);
         }
         
-        .monto-option input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+        .monto-info { flex: 1; }
         
-        .monto-option input[type="radio"]:checked + .monto-content {
-            background: #E3F2FD;
-            border-left-color: #2196F3;
-        }
-        
-        .monto-option input[type="radio"]:checked + .monto-content .monto-valor {
-            color: #1976D2;
-        }
-        
-        .monto-option input[type="radio"]:checked + .monto-content .monto-regalo {
-            color: #1976D2;
-            font-weight: 600;
-        }
-        
-        .monto-content {
-            padding: 16px;
-            border-left: 4px solid transparent;
-            transition: all 0.3s ease;
-            display: block;
-            background: #fff;
-        }
-        
-        .monto-valor {
-            font-size: 24px;
+        .monto-precio {
+            font-size: 28px;
             font-weight: 700;
             color: #000;
             margin-bottom: 4px;
-            line-height: 1;
-            transition: color 0.3s ease;
         }
         
         .monto-regalo {
-            font-size: 13px;
-            color: #5d8bf4;
-            margin-bottom: 5px;
-            line-height: 1.2;
-            transition: all 0.3s ease;
+            font-size: 14px;
+            color: #6366F1;
+            font-weight: 600;
+            margin-left: 10px;
         }
         
         .monto-detalles {
-            font-size: 12px;
+            font-size: 14px;
             color: #666;
-            line-height: 1.3;
+            line-height: 1.4;
         }
         
-        .botones {
-            display: flex;
-            gap: 10px;
-            margin-top: 30px;
-            position: sticky;
-            bottom: 0;
-            background: #f5f5f5;
-            padding: 15px 0;
-        }
+        .arrow { font-size: 24px; color: #00AEEF; }
         
-        button {
-            flex: 1;
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        button:active {
-            transform: scale(0.97);
-        }
-        
-        .btn-volver {
-            background: #6c757d;
-            color: #fff;
-        }
-        
-        .btn-siguiente {
-            background: #5d8bf4;
-            color: #fff;
-        }
-        
-        .btn-siguiente:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-        
-        /* TABLET */
-        @media (min-width: 768px) {
-            .header {
-                padding: 15px 30px;
-            }
-            
-            .logo { font-size: 18px; }
-            .sitio-seguro { font-size: 12px; }
-            
-            .container {
-                padding: 40px 20px;
-            }
-            
-            h1 {
-                font-size: 24px;
-                margin-bottom: 30px;
-            }
-            
-            .descripcion {
-                font-size: 14px;
-                margin-bottom: 40px;
-            }
-            
-            .monto-option {
-                margin-bottom: 12px;
-            }
-            
-            .monto-content {
-                padding: 20px;
-            }
-            
-            .monto-valor {
-                font-size: 28px;
-            }
-            
-            .monto-regalo {
-                font-size: 14px;
-            }
-            
-            .monto-detalles {
-                font-size: 13px;
-            }
-            
-            .botones {
-                margin-top: 40px;
-                gap: 12px;
-            }
+        @media (max-width: 768px) {
+            .banner { padding: 40px 20px; }
+            .banner h1 { font-size: 32px; }
+            .banner p { font-size: 16px; }
+            .container { padding: 30px 20px; }
+            h2 { font-size: 26px; }
+            .monto-precio { font-size: 24px; }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="logo">personal flow</div>
-        <div class="sitio-seguro">🔒 Sitio Seguro</div>
+        <div class="logo">personal</div>
+        <div class="sitio-seguro">🔒 Sitio seguro</div>
+    </div>
+
+    <div class="banner">
+        <div class="banner-content">
+            <h1>Recibí hasta un 20% de reintegro</h1>
+            <p>Ahorrá hasta $8.000 por mes en tus recargas pagando con tarjeta Visa Personal Pay.</p>
+        </div>
     </div>
 
     <div class="container">
-        <h1>Monto a recargar</h1>
-        
-        <div class="descripcion">
-            Con tu Recarga tenés un <strong>20%</strong> de crédito extra. Además si recargás <strong>$40000 o más</strong>, tenés <strong>2 GB para navegar y 2 GB para redes y video + WhatsApp gratis + Llamadas ilimitadas</strong> durante <strong>30 días</strong>
+        <div class="phone-display">
+            📱 Número de línea ingresado: <strong><?php echo htmlspecialchars($phone); ?></strong>
         </div>
 
-        <form method="POST" action="step2.php">
+        <h2>Recargá crédito</h2>
+        
+        <div class="descripcion">
+            Por hacerlo desde esta web, tenés un <strong>20% de crédito de regalo</strong>. Además, tus recargas incluyen llamadas ilimitadas, WhatsApp y otros beneficios.
+            <br>¡Aprovechá todo el crédito disponible para comprar packs!
+        </div>
+
+        <form method="POST" action="step2.php" id="formMonto">
             <input type="hidden" name="phone" value="<?php echo htmlspecialchars($phone); ?>">
+            <input type="hidden" name="amount" id="selectedAmount">
             
-            <label class="monto-option">
-                <input type="radio" name="amount" value="7000" required>
-                <div class="monto-content">
-                    <div class="monto-valor">$7.000</div>
-                    <div class="monto-regalo">+1.400 de regalo</div>
+            <div class="monto-card" onclick="seleccionar(4000)">
+                <div class="monto-info">
+                    <div><span class="monto-precio">$4.000</span><span class="monto-regalo">+800 de regalo</span></div>
                     <div class="monto-detalles">Incluye: WhatsApp + minutos a Personal x 7 días</div>
                 </div>
-            </label>
+                <div class="arrow">›</div>
+            </div>
 
-            <label class="monto-option">
-                <input type="radio" name="amount" value="10000">
-                <div class="monto-content">
-                    <div class="monto-valor">$10.000</div>
-                    <div class="monto-regalo">+2.000 de regalo</div>
+            <div class="monto-card" onclick="seleccionar(5000)">
+                <div class="monto-info">
+                    <div><span class="monto-precio">$5.000</span><span class="monto-regalo">+1.000 de regalo</span></div>
+                    <div class="monto-detalles">Incluye: WhatsApp + minutos a Personal x 7 días</div>
+                </div>
+                <div class="arrow">›</div>
+            </div>
+
+            <div class="monto-card" onclick="seleccionar(6000)">
+                <div class="monto-info">
+                    <div><span class="monto-precio">$6.000</span><span class="monto-regalo">+1.200 de regalo</span></div>
                     <div class="monto-detalles">Incluye: WhatsApp + minutos a Personal x 15 días</div>
                 </div>
-            </label>
+                <div class="arrow">›</div>
+            </div>
 
-            <label class="monto-option">
-                <input type="radio" name="amount" value="15000">
-                <div class="monto-content">
-                    <div class="monto-valor">$15.000</div>
-                    <div class="monto-regalo">+3.000 de regalo</div>
+            <div class="monto-card" onclick="seleccionar(7000)">
+                <div class="monto-info">
+                    <div><span class="monto-precio">$7.000</span><span class="monto-regalo">+1.400 de regalo</span></div>
                     <div class="monto-detalles">Incluye: WhatsApp + minutos a Personal x 15 días</div>
                 </div>
-            </label>
+                <div class="arrow">›</div>
+            </div>
 
-            <label class="monto-option">
-                <input type="radio" name="amount" value="20000">
-                <div class="monto-content">
-                    <div class="monto-valor">$20.000</div>
-                    <div class="monto-regalo">+4.000 de regalo</div>
+            <div class="monto-card" onclick="seleccionar(8000)">
+                <div class="monto-info">
+                    <div><span class="monto-precio">$8.000</span><span class="monto-regalo">+1.600 de regalo</span></div>
                     <div class="monto-detalles">Incluye: WhatsApp + minutos a Personal x 30 días</div>
                 </div>
-            </label>
+                <div class="arrow">›</div>
+            </div>
 
-            <label class="monto-option">
-                <input type="radio" name="amount" value="25000">
-                <div class="monto-content">
-                    <div class="monto-valor">$25.000</div>
-                    <div class="monto-regalo">+5.000 de regalo</div>
+            <div class="monto-card" onclick="seleccionar(9000)">
+                <div class="monto-info">
+                    <div><span class="monto-precio">$9.000</span><span class="monto-regalo">+1.800 de regalo</span></div>
                     <div class="monto-detalles">Incluye: WhatsApp + minutos a Personal x 30 días</div>
                 </div>
-            </label>
+                <div class="arrow">›</div>
+            </div>
 
-            <label class="monto-option">
-                <input type="radio" name="amount" value="30000">
-                <div class="monto-content">
-                    <div class="monto-valor">$30.000</div>
-                    <div class="monto-regalo">+6.000 de regalo</div>
+            <div class="monto-card" onclick="seleccionar(10000)">
+                <div class="monto-info">
+                    <div><span class="monto-precio">$10.000</span><span class="monto-regalo">+2.000 de regalo</span></div>
                     <div class="monto-detalles">Incluye: WhatsApp + minutos a Personal x 30 días</div>
                 </div>
-            </label>
+                <div class="arrow">›</div>
+            </div>
 
-            <div class="botones">
-                <button type="button" class="btn-volver" onclick="window.history.back()">Volver</button>
-                <button type="submit" class="btn-siguiente" id="btnContinuar" disabled>Continuar</button>
+            <div class="monto-card" onclick="seleccionar(12000)">
+                <div class="monto-info">
+                    <div><span class="monto-precio">$12.000</span><span class="monto-regalo">+2.400 de regalo</span></div>
+                    <div class="monto-detalles">Incluye: WhatsApp + minutos a Personal x 30 días</div>
+                </div>
+                <div class="arrow">›</div>
+            </div>
+
+            <div class="monto-card" onclick="seleccionar(15000)">
+                <div class="monto-info">
+                    <div><span class="monto-precio">$15.000</span><span class="monto-regalo">+3.000 de regalo</span></div>
+                    <div class="monto-detalles">Incluye: WhatsApp + minutos a Personal x 30 días</div>
+                </div>
+                <div class="arrow">›</div>
+            </div>
+
+            <div class="monto-card" onclick="seleccionar(30000)">
+                <div class="monto-info">
+                    <div><span class="monto-precio">$30.000</span><span class="monto-regalo">+6.000 de regalo</span></div>
+                    <div class="monto-detalles">Incluye: WhatsApp + minutos a Personal x 30 días</div>
+                </div>
+                <div class="arrow">›</div>
             </div>
         </form>
     </div>
 
     <script>
-        document.querySelectorAll('input[name="amount"]').forEach(radio => {
-            radio.addEventListener('change', () => {
-                document.getElementById('btnContinuar').disabled = false;
-            });
-        });
+        function seleccionar(monto) {
+            document.getElementById('selectedAmount').value = monto;
+            document.getElementById('formMonto').submit();
+        }
     </script>
 </body>
 </html>
